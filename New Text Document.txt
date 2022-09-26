@@ -1,0 +1,211 @@
+using System.Runtime;
+using System.Runtime.CompilerServices;
+
+namespace ModulInheritance
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Vga vga1 = new Vga("Vga Nvidia");
+            Vga vga2 = new Vga("Vga AMD");
+
+            laptop laptop1 = new Vivobook("ASUS", "Vivobook", vga1);
+            laptop1.LaptopDinyalakan();
+            laptop1.LaptopDimatikan();
+            Console.WriteLine(laptop1.vga.merk);
+            Console.WriteLine();
+
+            laptop laptop2 = new IdeaPad("Lenovo", "Idea Pad", vga2);
+            laptop2.LaptopDinyalakan();
+            laptop2.LaptopDimatikan();
+            Console.WriteLine(laptop2.vga.merk);
+            Console.WriteLine();
+
+            Predator predator = new Predator("Acer", "Predator", vga1);
+            predator.LaptopDinyalakan();
+            predator.LaptopDimatikan();
+            Console.WriteLine();
+        }
+    }
+}
+class Processor
+{
+    public string merk;
+    public string tipe;
+    public Processor(string merk, string tipe)
+    {
+        this.merk = merk;
+        this.tipe = tipe;
+    }
+}
+class Intel : Processor
+{
+    public Intel(string merk, string tipe) : base(merk, tipe)
+    {
+        merk = "Intel";
+    }
+}
+class Corei3 : Intel
+{
+    public Corei3(string merk, string tipe) : base(merk, tipe)
+    {
+        merk = "Corei3";
+    }
+}
+class Corei5 : Intel
+{
+    public Corei5(string merk, string tipe) : base(merk, tipe)
+    {
+        merk = "Corei5";
+    }
+}
+class Corei7 : Intel
+{
+    public Corei7(string merk, string tipe) : base(merk, tipe)
+    {
+        merk = "Corei7";
+    }
+}
+class amd : Processor
+{
+    public amd(string merk, string tipe) : base(merk, tipe)
+    {
+        merk = "amd";
+    }
+}
+class Ryzen : amd
+{
+    public Ryzen(string merk, string tipe) : base(merk, tipe)
+    {
+        merk = "Ryzen";
+    }
+}
+class Athlon : amd
+{
+    public Athlon(string merk, string tipe) : base(merk, tipe)
+    {
+        merk = "Ryzen";
+    }
+}
+class Vga
+{
+    public string merk;
+    public Vga(string merk)
+    {
+        this.merk = merk;
+    }
+}
+
+class AMD : Vga
+{
+    public AMD(string merk) : base(merk)
+    {
+        merk = "AMD";
+    }
+}
+
+class Nvidia : Vga
+{
+    public Nvidia(string merk) : base(merk)
+    {
+        merk = "Nvidia";
+    }
+}
+
+class laptop
+{
+    public string merk;
+    public string tipe;
+    public Vga vga;
+    public Processor processor;
+
+    public laptop(string merk, string tipe, Vga vga, Processor processor)
+    {
+        this.merk = merk;
+        this.tipe = tipe;
+        this.vga = vga;
+        this. processor = processor;
+    }
+
+    public void LaptopDinyalakan()
+    {
+        Console.WriteLine($"Laptop {this.merk} {this.tipe} menyala");
+    }
+
+    public void LaptopDimatikan()
+    {
+        Console.WriteLine($"Laptop {this.merk} {this.tipe} mati");
+    }
+}
+
+class acer : laptop
+{
+    public acer(string merk, string tipe, Vga vga, Processor processor) : base("ACER", tipe, vga, processor)
+    {
+    }
+}
+
+class Swift : acer
+{
+    public Swift(string merk, string tipe, Vga vga, Processor processor) : base(merk, "Swift", vga, processor)
+    {
+    }
+}
+
+class Predator : acer
+{
+    public Predator(string merk, string tipe, Vga vga, Processor processor) : base(merk, "Predator", vga, processor)
+    {
+    }
+    public void BermainGame()
+    {
+        Console.WriteLine($"Laptop {this.merk} {this.tipe} sedang memainkan game");
+    }
+}
+
+class Lenovo : laptop
+{
+    public Lenovo(string merk, string tipe, Vga vga, Processor processor) : base("Lenovo", tipe, vga, processor)
+    {
+    }
+}
+
+class IdeaPad : Lenovo
+{
+    public IdeaPad(string merk, string tipe, Vga vga, Processor processor) : base(merk, "Idea Pad", vga, processor)
+    {
+    }
+}
+
+class Legion : Lenovo
+{
+    public Legion(string merk, string tipe, Vga vga, Processor processor) : base(merk, "Legion", vga, processor)
+    {
+    }
+}
+
+class asus : laptop
+{
+    public asus(string merk, string tipe, Vga vga, Processor processor) : base("ASUS", tipe, vga, processor)
+    {
+    }
+}
+
+class Vivobook : asus
+{
+    public Vivobook(string merk, string tipe, Vga vga, Processor processor) : base(merk, "Vivobook", vga, processor)
+    {
+    }
+    public void Ngoding()
+    {
+        Console.WriteLine($"Ctak Ctak Ctak, error lagi!!");
+    }
+}
+
+class ROG : asus
+{
+    public ROG(string merk, string tipe, Vga vga, Processor processor) : base(merk, "ROG", vga, processor)
+    {
+    }
+}
